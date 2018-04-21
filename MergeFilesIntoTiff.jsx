@@ -118,7 +118,7 @@ function lookForDuplicate(array,indexOfElement){
 
 if (inputNames.length%2===0) {
   for (var j = 0; j < inputNames.length; j++) {
-    inputNames.pair = lookForDuplicate(inputNames,j);
+    inputNames[j].pair = lookForDuplicate(inputNames,j);
   }
 } else {
   alert("W katalogu jest nieparzysta liczba plików. || There is uneven number of files in the input folder.");
