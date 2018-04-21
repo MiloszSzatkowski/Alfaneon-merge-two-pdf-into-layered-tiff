@@ -153,6 +153,11 @@ var new_layer_from_file;
 var new_background_from_file;
 var Path;
 
+
+// app.load(File($.fileName)).parent + "/Save to tiff.atn");
+// var loadedATNPath = File.openDialog( 'select your AI file…' ) ;
+// app.loadAction (new File(loadedATNPath));
+
 for (var i = 0; i < inputNames.length; i++) {
   if (inputNames[i].type==firstType) {
     new_background_from_file = open(inputNames[i].path, pdfOpenOptions);
@@ -164,40 +169,9 @@ for (var i = 0; i < inputNames.length; i++) {
     app.activeDocument = new_background_from_file;
     new_background_from_file.paste();
     app.activeDocument.activeLayer.name = inputNames[i].compareName;
-    app.activeDocument.flatten();
-    Filename = app.activeLayer.name.replace(/\./g, '');
-    SaveTIFF(new File("C:/Users/miopu/Desktop/Coding/Photoshop/Alfaneon-combine-two-pdfs-into-layered-tiff/Files for testing/output" + "/" + "ads.tif"));
-    break;
-    app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+
+    app.doAction("save","Save to tiff.ATN");
+
+    new_background_from_file.close(SaveOptions.DONOTSAVECHANGES);
   }
 }
-
-function SaveTIFF(saveFile){
-  tiffSaveOptions = new TiffSaveOptions();
-  tiffSaveOptions.embedColorProfile = true;
-  tiffSaveOptions.alphaChannels = true;
-  tiffSaveOptions.layers = true;
-  tiffSaveOptions.imageCompression = TIFFEncoding.TIFFLZW;
-  app.activeDocument.saveAs(saveFile, tiffSaveOptions, true, Extension.LOWERCASE);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function isOdd  (x) { return x & 1; };
-// function isEven (x) { return !( x & 1 ); };
-// function isZero (x) { return ((x === 0) ? true : false)};
-// function isNotZero (x) { return ((x === 0) ? false : true)};
