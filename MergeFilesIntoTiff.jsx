@@ -145,7 +145,7 @@ pdfOpenOptions.antiAlias = true;
 pdfOpenOptions.mode = OpenDocumentMode.CMYK;
 pdfOpenOptions.bitsPerChannel = BitsPerChannelType.EIGHT;
 
-pdfOpenOptions.resolution = 2;
+pdfOpenOptions.resolution = 100;
 pdfOpenOptions.supressWarnings = true;
 pdfOpenOptions.cropPage = CropToType.TRIMBOX;
 
