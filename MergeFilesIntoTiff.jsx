@@ -53,7 +53,7 @@ var myfile;
 var wipeThat;
 for (var o = 0; o < fileList.length; o++) {
   myfile = fileList[o];
-  wipeThat = myfile.name.replace(/%|_|[+ -]|20|only/g,'@');
+  wipeThat = myfile.name.replace(/%20|_|[+ -]|only/g,'@');
   myfile.rename(wipeThat.replace(/@/g,'' ));
 }
 
@@ -145,7 +145,7 @@ pdfOpenOptions.antiAlias = true;
 pdfOpenOptions.mode = OpenDocumentMode.CMYK;
 pdfOpenOptions.bitsPerChannel = BitsPerChannelType.EIGHT;
 
-pdfOpenOptions.resolution = 100;
+pdfOpenOptions.resolution = 2;
 pdfOpenOptions.supressWarnings = true;
 pdfOpenOptions.cropPage = CropToType.TRIMBOX;
 
