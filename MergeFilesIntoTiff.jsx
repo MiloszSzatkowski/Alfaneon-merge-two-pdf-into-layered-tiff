@@ -124,13 +124,27 @@ if (inputNames.length%2===0) {
   alert("W katalogu jest nieparzysta liczba plików. || There is uneven number of files in the input folder.");
 }
 
-
-alert(inputNames[0].pair + "         " + inputNames[2].pair);
-
+//all of object have their pairs
 // OPEN SCRIPT !
 
+// app.preferences.rulerUnits = Units.CM;
+app.displayDialogs = DialogModes.NO;
 
+var pdfOpenOptions = new PDFOpenOptions();
 
+pdfOpenOptions.antiAlias = true;
+pdfOpenOptions.mode = OpenDocumentMode.CMYK;
+pdfOpenOptions.bitsPerChannel = BitsPerChannelType.EIGHT;
+
+pdfOpenOptions.resolution = 100;
+pdfOpenOptions.supressWarnings = true;
+pdfOpenOptions.cropPage = CropToType.TRIMBOX;
+
+for (var i = 0; i < inputNames.length; i++) {
+  if (inputNames[i].type==firstType) {
+    open(fileList[i], pdfOpenOptions);
+  }
+}
 
 
 
