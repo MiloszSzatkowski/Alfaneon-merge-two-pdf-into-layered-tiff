@@ -40,6 +40,16 @@ var samplesFolder = new Folder(inputPaths);
 //Get the files
 var fileList = samplesFolder.getFiles();
 
+//prepare the names - erase all spaces and lowdashes
+// = File.openDialog( 'select your AI file…' );
+var myfile;
+var wipeThat;
+for (var o = 0; o < fileList.length; o++) {
+  myfile = fileList[o];
+  wipeThat = myfile.name.replace(/%|_|[+ -]|20|only/g,'@');
+  myfile.rename(wipeThat.replace(/@/g,'' ));
+}
+
 //create object holding values for name
 function FileNameObj (pathOfFile, fullName, restConcat, type, pair){
  this.path = pathOfFile;
@@ -89,12 +99,60 @@ for (var i = 0; i < fileList.length; i++) {
     fileList[i].toString().replace(/\\/g, '/'),
     fileList[i].name,
     removeType(fileList[i].name, firstType, secondType),
-    gimmeType (fileList[i].name, firstType, secondType)
+    gimmeType (fileList[i].name, firstType, secondType),
+    "temp"
   );
 }
 
-//explode string on spaces and dashes
+// alert(inputNames[0].compareName);
+// alert(inputNames[2].compareName);
 
-alert(inputNames[2].type);
+function lookForDuplicate(array,indexOfElement){
+  for (var g = 0; g < array.length; g++){
+    if (array[indexOfElement].compareName==array[g].compareName) {
+      return array[g].path;
+      break;
+    }
+  }
+}
+
+if (inputNames.length%2===0) {
+  for (var j = 0; j < inputNames.length; j++) {
+    inputNames.pair = lookForDuplicate(inputNames,j);
+  }
+} else {
+  alert("W katalogu jest nieparzysta liczba plików. || There is uneven number of files in the input folder.");
+}
+
+
+alert(inputNames[0].pair + "         " + inputNames[2].pair);
 
 // OPEN SCRIPT !
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function isOdd  (x) { return x & 1; };
+// function isEven (x) { return !( x & 1 ); };
+// function isZero (x) { return ((x === 0) ? true : false)};
+// function isNotZero (x) { return ((x === 0) ? false : true)};
