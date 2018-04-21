@@ -96,7 +96,8 @@ var inputNames = [];
 
 for (var i = 0; i < fileList.length; i++) {
   inputNames[i] = new FileNameObj(
-    fileList[i].toString().replace(/\\/g, '/'),
+    // fileList[i].toString().replace(/\\/g, '/'),
+    fileList[i],
     fileList[i].name,
     removeType(fileList[i].name, firstType, secondType),
     gimmeType (fileList[i].name, firstType, secondType),
@@ -109,7 +110,8 @@ for (var i = 0; i < fileList.length; i++) {
 
 function lookForDuplicate(array,indexOfElement){
   for (var g = 0; g < array.length; g++){
-    if (array[indexOfElement].compareName==array[g].compareName) {
+    if (array[indexOfElement].compareName==array[g].compareName
+     && g!==indexOfElement) {
       return array[g].path;
       break;
     }
@@ -140,13 +142,22 @@ pdfOpenOptions.resolution = 100;
 pdfOpenOptions.supressWarnings = true;
 pdfOpenOptions.cropPage = CropToType.TRIMBOX;
 
+var new_layer_from_file;
+var new_background_from_file;
+
 for (var i = 0; i < inputNames.length; i++) {
   if (inputNames[i].type==firstType) {
-    open(fileList[i], pdfOpenOptions);
+    new_background_from_file = open(inputNames[i].path, pdfOpenOptions);
+    app.activeDocument.activeLayer.name = inputNames[i].compareName;
+    new_layer_from_file = open(inputNames[i].pair, pdfOpenOptions);
+    new_layer_from_file.selection.selectAll();
+    new_layer_from_file.selection.copy();
+    new_layer_from_file.close(SaveOptions.DONOTSAVECHANGES);
+    app.activeDocument = new_background_from_file;
+    new_background_from_file.paste();
+    app.activeDocument.activeLayer.name = inputNames[i].compareName;
   }
 }
-
-
 
 
 
